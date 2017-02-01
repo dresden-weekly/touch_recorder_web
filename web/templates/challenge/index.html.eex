@@ -1,0 +1,30 @@
+<h2>Listing challenges</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Details</th>
+      <th>Description set</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for challenge <- @challenges do %>
+    <tr>
+      <td><%= challenge.name %></td>
+      <td><%= challenge.details %></td>
+      <td><%= challenge.description_set %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: challenge_path(@conn, :show, challenge), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: challenge_path(@conn, :edit, challenge), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: challenge_path(@conn, :delete, challenge), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New challenge", to: challenge_path(@conn, :new) %>

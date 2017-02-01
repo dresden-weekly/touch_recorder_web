@@ -1,0 +1,27 @@
+<h2>Listing submissions</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Challenge</th>
+      <th>Archive</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for submission <- @submissions do %>
+    <tr>
+      <td><%= submission.author %></td>
+      <td><%= submission.challenge_id %></td>
+      <td><%= length submission.archive %> Record</td>
+
+      <td class="text-right">
+        <%= link "Show", to: submission_path(@conn, :show, submission), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: submission_path(@conn, :delete, submission), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

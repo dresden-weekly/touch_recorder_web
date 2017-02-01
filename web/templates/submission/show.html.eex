@@ -1,0 +1,22 @@
+<h2>Show submission</h2>
+
+<ul>
+
+  <li>
+    <strong>Author:</strong>
+    <%= @submission.author %>
+  </li>
+
+  <li>
+    <strong>Challenge:</strong>
+    <%= @submission.challenge_id %>
+  </li>
+
+  <li>
+    <strong>Archive:</strong>
+    <%= Poison.encode! @submission.archive %>
+  </li>
+
+</ul>
+
+<%= link "Back", to: submission_path(@conn, :index) %>
