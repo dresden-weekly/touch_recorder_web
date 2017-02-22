@@ -24,15 +24,15 @@ defmodule TouchRecorderWeb.ApiSubmissionController do
     }) do
 
     query = from s in Submission,
-    where: [challenge_id: ^ch_id],
-    where: s.inserted_at >= type(^Ecto.Date.from_erl(
-    {
-      String.to_integer(ch_year),
-      String.to_integer(ch_month),
-      String.to_integer(ch_day)
-    }),Ecto.Date),
-    order_by: [desc: s.inserted_at],
-    select: [s.archive]
+      where: [challenge_id: ^ch_id],
+      where: s.inserted_at >= type(^Ecto.Date.from_erl(
+      {
+        String.to_integer(ch_year),
+        String.to_integer(ch_month),
+        String.to_integer(ch_day)
+      }),Ecto.Date),
+      order_by: [desc: s.inserted_at],
+      select: s.archive
 
     submission = Repo.all(query)
     json conn, %{ submission: submission }
