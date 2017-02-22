@@ -25,6 +25,6 @@ defmodule TouchRecorderWeb.Router do
   scope "/api", TouchRecorderWeb do
     pipe_through :api
     resources "/challenges", ApiChallengeController, only: [:index]
-    resources "/submissions", ApiSubmissionController, only: [:create]
+    resources "/submissions", ApiSubmissionController, only: [:create, :index]
   end
 end
