@@ -45,4 +45,30 @@ window.onload = () => {
         }
       }
     });
+  Array.from(document.querySelectorAll(".submission_strokes"))
+    .forEach(el => {
+      let strokes = JSON.parse(el.dataset.json);
+      let c = el;
+      let size = c.width;
+      let ctx = c.getContext("2d");
+      let xA = [].concat([], ...strokes).map(p => parseFloat(p['x']));
+      let yA = [].concat([], ...strokes).map(p => parseFloat(p['y']));
+      let tA = [].concat([], ...strokes).map(p => parseFloat(p['t']));
+      let minX = Math.min(...xA);
+      let maxX = Math.max(...xA);
+      let minY = Math.min(...yA);
+      let maxY = Math.max(...yA);
+      let minT = Math.min(...tA);
+      let maxT = Math.max(...tA);
+      ctx.translate(5, 5);
+      ctx.scale((size-10)/(maxX-minX), (size-10)/(maxY-minY));
+      ctx.translate(-minX, -minY);
+      let pix = p => [parseFloat(p['x']), parseFloat(p['y'])];
+
+      strokes.forEach(s => {
+        ctx.moveTo(...pix(s[0]));
+        s.forEach(p => { ctx.lineTo(...pix(p)); });
+      });
+      ctx.stroke();
+    });
 }

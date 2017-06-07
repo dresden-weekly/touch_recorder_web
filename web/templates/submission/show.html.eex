@@ -14,9 +14,27 @@
 
   <li>
     <strong>Archive:</strong>
-    <%= Poison.encode! @submission.archive %>
+    <%= for item <- @submission.archive do %>
+    <div class="submission_picture">
+      <ul>
+        <li>
+          <strong>Draw:</strong>
+          <%= item["description"] %>
+        </li>
+        <li>
+          <strong>Client:</strong>
+          <%= item["client"] %>
+        </li>
+        <li>
+          <strong>Strokes:</strong>
+          <canvas class="submission_strokes" width="100" height="100" data-json="<%= Poison.encode! item["strokes"] %>">
+        </li>
+      </ul>
+    </div>
+    <% end %>
   </li>
 
 </ul>
 
 <%= link "Back", to: submission_path(@conn, :index) %>
+
